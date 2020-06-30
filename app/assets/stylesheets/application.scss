@@ -26,6 +26,10 @@ $heading-scale: 2; // amount of px headings grow from h6 to h1
 
 body {
     padding: 3em;
+    .nav {
+        background: #FFF;
+        border-bottom: 0.75px solid #DDD;
+    }
     .jumbotron {
         background: #FFF;
         border:    0.75pt solid #000;

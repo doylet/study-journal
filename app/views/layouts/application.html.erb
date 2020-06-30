@@ -14,6 +14,18 @@
   </head>
 
   <body>
+    <ul class="nav fixed-top">
+      <li class="nav-item">
+        <%= link_to "Home", root_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+        <%= link_to 'Articles', articles_path, class:"nav-link" %> 
+        </li>
+        <li class="nav-item">
+        <%= link_to "New Article", new_article_path, class:"nav-link" %></li>
+        </li>
+      </li>
+    </ul>
   <div class="container col-lg-6 col-md-12">
     <%= yield %>
     </div>
