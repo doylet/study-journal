@@ -1,0 +1,42 @@
+<% if notice %>
+<div id="notice" class="alert alert-primary" role="alert"><%= notice %></div>
+<% end %>
+<div class="container">
+<div class="row">
+  <p>
+      <%= link_to 'Home', root_path %> | 
+      <%= link_to 'Back', articles_path %> |
+      <%= link_to 'New Article', new_article_path %>
+  </p>
+</div>
+<div class="jumbotron">
+  <p>
+  <%= link_to 'Edit', edit_article_path(@article) %>
+  <h1><%= @article.title %></h1>
+  </p>
+  <div class="content-group">
+  <p>
+    <h2>Question</h2>
+    <%= markdown(@article.question) %>
+  </p>
+  </div>
+  <div class="content-group">
+  <h2>Answer</h2>
+  <p>
+    <%= markdown(@article.answer) %>
+  </p>
+  <p>
+  Tags:
+  <% @article.tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag) %>, 
+  <% end %>
+  </p>
+  </div>
+</div>
+<hr>
+<strong>Leave a comment!</strong>
+<%= render partial: 'comments/form' %>
+
+<strong>Comments (<%= @article.comments.size %>)</strong>
+<%= render partial: 'articles/comment', collection: @article.comments.reverse %>
+</div>
