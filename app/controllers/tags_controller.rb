@@ -3,6 +3,7 @@ class TagsController < ApplicationController
     def index
         @tags = Tag.all
         @titles = Article.distinct.pluck(:title)
+        @articles = Article.all
     end
     
     def show

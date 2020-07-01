@@ -1,20 +1,21 @@
 
 <div class="container">
-<div class="row">
-<div class="col-md">
-<ul>
-<% @tags.order("name asc").each do |tag| %>
-    <% if tag.articles.size > 0 %>
-        <li><%= link_to tag.name, tag %> <%= tag.articles.size %></li>
-    <% end %>
-<% end %>
-</ul>
-</div>
-<div class="col-md">
-<ul>
-<% @titles.each do |title| %>
-    <li><%= link_to title, articles_path(title) %></li>
-    <% end %>
-    </u>
-</div>
+    <div class="row">
+        <div class="col-md">
+            <ul>
+                <% @tags.order("name asc").each do |tag| %>
+                    <% if tag.articles.size > 0 %>
+                        <li><%= link_to tag.name, tag %> <%= tag.articles.size %></li>
+                    <% end %>
+                <% end %>
+            </ul>
+        </div>
+        <div class="col-md">
+            <ul>
+                <% @titles.each do |title| %>
+                    <li><%= link_to title, articles_path(title) %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
 </div>
