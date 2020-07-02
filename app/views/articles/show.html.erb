@@ -1,19 +1,19 @@
 <% if notice %>
 <div id="notice" class="alert alert-primary" role="alert"><%= notice %></div>
 <% end %>
+
 <div class="container">
-<div class="row">
-  <p>
+<div class="row justify-content-start">
+  <div class="col align-self-start">
       <%= link_to 'Home', root_path %> | 
       <%= link_to 'Back', articles_path %> |
-      <%= link_to 'New Article', new_article_path %>
-  </p>
+      <%= link_to 'Edit', edit_article_path(@article) %>
+  </div>
 </div>
+
 <div class="jumbotron">
-  <p>
-  <%= link_to 'Edit', edit_article_path(@article) %>
-  <h1><%= @article.title %></h1>
-  </p>
+  <p><%= @article.title %></p>
+  <h1><%= @article.subject %></h1>
   <div class="content-group">
   <p>
     <h2>Question</h2>
@@ -25,12 +25,14 @@
   <p>
     <%= markdown(@article.answer) %>
   </p>
-  <p>
-  Tags:
-  <% @article.tags.each do |tag| %>
-    <%= link_to tag.name, tag_path(tag) %>, 
-  <% end %>
-  </p>
+  </div>
+  <div class="content-group">
+    <p>
+    Tags:
+    <% @article.tags.each do |tag| %>
+      <%= link_to tag.name, tag_path(tag) %>, 
+    <% end %>
+    </p>
   </div>
 </div>
 <hr>

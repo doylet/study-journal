@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
-    
+    before_action :require_login
+
     def index
         @tags = Tag.all
         @titles = Article.distinct.pluck(:title)
@@ -34,5 +35,12 @@ class TagsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def tag_params
         params.require(:tag).permit(:name)
+    end
+
+    def require_login
+        unless logged_in?
+          flash[:error] = "You must be logged in to access this section"
+          redirect_to login_url # halts request cycle
+        end
     end
 end
