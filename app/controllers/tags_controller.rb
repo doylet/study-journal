@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-    before_action :require_login
+    before_action :course, only: [:show, :edit, :update, :destory]
 
     def index
         @tags = Tag.all
@@ -37,10 +37,11 @@ class TagsController < ApplicationController
         params.require(:tag).permit(:name)
     end
 
-    def require_login
-        unless logged_in?
-          flash[:error] = "You must be logged in to access this section"
-          redirect_to login_url # halts request cycle
-        end
+    def articles
+        @articles = Article.all
+    end
+
+    def course
+        @course ||= course.tags.find(params[:course_id, :id])
     end
 end

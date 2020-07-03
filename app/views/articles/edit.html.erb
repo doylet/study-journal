@@ -3,5 +3,5 @@
 
 <%= render 'form', article: @article %>
 
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>
+<%= link_to 'Show', course_article_path(@course, @article) %>
+<%= link_to 'Back', course_articles_path %>

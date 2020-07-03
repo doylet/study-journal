@@ -13,17 +13,16 @@ Rails.application.routes.draw do
     resources :tags do
       resources :articles
     end
-    resources :definitions
   end
 
-  resources :articles do
-    resources :comments
-  end  
+  # resources :articles do
+  #   resources :comments
+  # end  
   
-  resources :tags do
-    resources :articles
-  end
+  # resources :tags do
+  #   resources :articles
+  # end
 
-  root 'tags#index'
+  root 'courses#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

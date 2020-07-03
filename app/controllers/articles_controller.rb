@@ -1,38 +1,40 @@
 class ArticlesController < ApplicationController
+  # before_action :course, only: [:show, :edit, :update, :destroy]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  # before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = course.articles
   end
 
-  # GET /articles/1
-  # GET /articles/1.json
+  # GET /course/:id/articles/1
+  # GET /course/:id/articles/1.json
   def show
-    @article = Article.find(params[:id])
-    @comment = Comment.new
-    @comment.article_id = @article.id
+    @course
+    # @articles = course.articles.find(params[:id])
+    # @article = @articles.find(params[:id])
   end
 
   # GET /articles/new
   def new
-    @article = Article.new
+    @article = course.articles.new
+  end
+  
+  # GET course/:course_id/articles/1/edit
+  def edit
+    @article = course.article.find(params[:id])
     # @article.course_id = params[:id]
   end
 
-  # GET /articles/1/edit
-  def edit
-  end
-
-  # POST /articles
+  # POST /courses/1/articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
+    @article = course.articles.new(article_params)
+    
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to course_articles_path(@course, @article), notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
@@ -46,7 +48,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        format.html { redirect_to course_article_path(course, @article), notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -60,7 +62,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to course_path(@course), notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -68,15 +70,15 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      @article = course.articles.find(params[:id])
     end
 
-    def set_course
-      @course = Course.find(params[:course_id])
+    def course
+      @course ||= Course.find(params[:course_id])
     end
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :subject, :question, :answer, :tag_list)
+      params.require(:article).permit(:title, :subject, :question, :answer, :tag_list, :course_id)
     end
 end

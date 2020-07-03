@@ -1,19 +1,28 @@
-<p id="notice"><%= notice %></p>
+<ul class="nav">
+  <li class="nav-item">
+    <%= link_to "New Article", new_course_article_path(@course, @article), class:"nav-link" %></li>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Back', courses_path, class:"nav-link" %>
+  </li>
+</ul>
 
+<p id="notice"><%= notice %></p>
 <p>
   <strong>Code:</strong>
   <%= @course.code.upcase %>
 </p>
-
 <p>
   <strong>Title:</strong>
   <%= @course.title.upcase %>
 </p>
 
-<p>
-  <strong>Semester:</strong>
-  <%= @course.semester %>
-</p>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<ul>
+  <% if @course.articles.size > 0 %>
+    <% @course.articles.each do |article| %>
+      <li><%= link_to article.subject, course_article_path(@course, article) %></li>
+    <% end %>
+  <% else %>
+    <p>Create a new article.</p>
+  <% end %>
+</ul>

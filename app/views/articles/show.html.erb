@@ -3,42 +3,37 @@
 <% end %>
 
 <div class="container">
-<div class="row justify-content-start">
-  <div class="col align-self-start">
+
+  <div class="row justify-content-start">
+    <div class="col align-self-start">
       <%= link_to 'Home', root_path %> | 
-      <%= link_to 'Back', articles_path %> |
-      <%= link_to 'Edit', edit_article_path(@article) %>
+      <%= link_to 'Back', course_articles_path(@course) %> |
+      <%= link_to 'Edit', edit_course_article_path(@course, @article) %>
+    </div>
   </div>
-</div>
 
-<div class="jumbotron">
-  <p><%= @article.title %></p>
-  <h1><%= @article.subject %></h1>
-  <div class="content-group">
-  <p>
-    <h2>Question</h2>
-    <%= markdown(@article.question) %>
-  </p>
-  </div>
-  <div class="content-group">
-  <h2>Answer</h2>
-  <p>
-    <%= markdown(@article.answer) %>
-  </p>
-  </div>
-  <div class="content-group">
+  <div class="jumbotron">
+    <p><%= @article.title %></p>
+    <h1><%= @article.subject %></h1>
+    <div class="content-group">
     <p>
-    Tags:
-    <% @article.tags.each do |tag| %>
-      <%= link_to tag.name, tag_path(tag) %>, 
-    <% end %>
+      <h2>Question</h2>
+      <%= markdown(@article.question) %>
     </p>
+    </div>
+      <div class="content-group">
+      <h2>Answer</h2>
+      <p>
+        <%= markdown(@article.answer) %>
+      </p>
+    </div>
+    <div class="content-group">
+      <p>
+      Tags:
+      <% @article.tags.each do |tag| %>
+        <%= link_to tag.name, course_tag_path(@course, tag) %>
+      <% end %>
+      </p>
+    </div>
   </div>
-</div>
-<hr>
-<strong>Leave a comment!</strong>
-<%= render partial: 'comments/form' %>
-
-<strong>Comments (<%= @article.comments.size %>)</strong>
-<%= render partial: 'articles/comment', collection: @article.comments.reverse %>
 </div>

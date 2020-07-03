@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_action :require_login
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
@@ -71,4 +72,11 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:code, :title)
     end
+
+    def require_login
+      unless logged_in?
+        flash[:error] = "You must be logged in to access this section"
+        redirect_to login_url # halts request cycle
+      end
+  end
 end

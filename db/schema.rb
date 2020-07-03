@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_090842) do
+ActiveRecord::Schema.define(version: 2020_07_03_044850) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2020_07_02_090842) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "answer"
     t.string "subject"
-    t.integer "courses_id"
-    t.index ["courses_id"], name: "index_articles_on_course_id"
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_articles_on_course_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -50,15 +50,6 @@ ActiveRecord::Schema.define(version: 2020_07_02_090842) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "definitions", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.integer "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_definitions_on_course_id"
-  end
-
   create_table "enrolments", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -79,9 +70,8 @@ ActiveRecord::Schema.define(version: 2020_07_02_090842) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "articles", "courses", column: "courses_id"
+  add_foreign_key "articles", "courses"
   add_foreign_key "comments", "articles"
-  add_foreign_key "definitions", "courses"
   add_foreign_key "taggings", "articles"
   add_foreign_key "taggings", "tags"
 end

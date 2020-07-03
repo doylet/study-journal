@@ -2,7 +2,7 @@ class Article < ApplicationRecord
     has_many :comments, dependent: :destroy
     has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings, dependent: :destroy
-    belongs_to :courses
+    belongs_to :course
 
     def tag_list
         tags.join(", ")
