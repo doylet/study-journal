@@ -42,6 +42,6 @@ class TagsController < ApplicationController
     end
 
     def course
-        @course ||= course.tags.find(params[:course_id, :id])
+        @course ||= Course.find(params[:course_id])
     end
 end

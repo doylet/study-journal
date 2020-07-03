@@ -4,15 +4,8 @@
             <ul>
                 <% @tags.order("name asc").each do |tag| %>
                     <% if tag.articles.size > 0 %>
-                        <li><%= link_to tag.name, course_tag_path(course, tag) %> <%= tag.articles.size %></li>
+                        <li><%= link_to tag.name, course_tag_path(@course, tag) %> <%= tag.articles.size %></li>
                     <% end %>
-                <% end %>
-            </ul>
-        </div>
-        <div class="col-md">
-            <ul>
-                <% @titles.each do |title| %>
-                    <li><%= link_to title, course_article_path(course, @article.title) %></li>
                 <% end %>
             </ul>
         </div>
