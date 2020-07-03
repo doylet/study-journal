@@ -1,11 +1,11 @@
 <%= link_to 'Tags', course_tags_path %> | <%= link_to 'Home', root_path %> 
 <hr>
-<p>Articles Tagged with: <strong><%= course.tag.name %></strong> (<%= link_to 'edit', edit_course_tag_path(course, @tag) %>)</p>
+<p>Articles Tagged with: <strong><%= @tag.name %></strong> (<%= link_to 'edit', edit_course_tag_path(@course, @tag) %>)</p>
 <hr>
 <div>
-<% course.tag.articles.each do |article| %>
+<% @tag.articles.each do |article| %>
     <div>
-      <p><%= link_to course_article.title, course_article_path(article) %></p>
+      <p><%= link_to article.title, course_tag_article_path(:course_id, :tag_id, :id) %></p>
       <strong>Question</strong>
       <p><%= markdown(article.question) %></p>
       <strong>Answer</strong>

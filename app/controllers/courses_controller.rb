@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :require_login
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  # before_action :course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
   # GET /courses.json
@@ -11,6 +11,7 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    @tags = course.tags
   end
 
   # GET /courses/new
@@ -64,8 +65,8 @@ class CoursesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.find(params[:id])
+    def course
+      @course ||= Course.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

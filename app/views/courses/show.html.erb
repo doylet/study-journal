@@ -18,11 +18,9 @@
 </p>
 
 <ul>
-  <% if @course.articles.size > 0 %>
-    <% @course.articles.each do |article| %>
-      <li><%= link_to article.subject, course_article_path(@course, article) %></li>
+  <% @tags.order("name asc").each do |tag| %>
+    <% if tag.articles.size > 0 %>
+      <li><%= link_to tag.name, course_tags_path(@course, tag) %> <%= tag.articles.size %></li>
     <% end %>
-  <% else %>
-    <p>Create a new article.</p>
   <% end %>
 </ul>

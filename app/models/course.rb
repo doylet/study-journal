@@ -6,9 +6,9 @@ class Course < ApplicationRecord
 
   before_save :downcase_code_field
 
-  def tags
-      @tags || articles.map{|article| article.tags}.flatten.compact
-  end
+  # def tags
+  #     @tags || articles.map{|article| article.tags}.flatten.compact
+  # end
 
   def downcase_code_field
     self.code.downcase

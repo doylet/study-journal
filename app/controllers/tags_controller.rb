@@ -2,17 +2,18 @@ class TagsController < ApplicationController
     before_action :course, only: [:show, :edit, :update, :destory]
 
     def index
-        @tags = Tag.all
-        @titles = Article.distinct.pluck(:title)
-        @articles = Article.all
+        @tags = course.tags.distinct
+        # @titles = Article.distinct.pluck(:title)
+        # @articles = Article.all
     end
     
     def show
-        @tag = Tag.find(params[:id])
+        @course = course
+        @tag = @course.tags.find(params[:id])
     end
 
     def edit
-        @tag = Tag.find(params[:id])
+        @tag = Tag.find(params[:id])    
     end
 
     def update
