@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
  
+  resources :glossaries
   resources :authors
   resources :author_sessions, only: [ :new, :create, :destroy ]
 

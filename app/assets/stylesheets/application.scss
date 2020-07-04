@@ -13,6 +13,8 @@
  */
  /*@import "@thoughtbot/design-system/src/index";*/
  // Custom bootstrap variables must be set or imported *before* bootstrap.
+ //= require actiontext
+
 @import "bootstrap";
 
 $base-font-size: 16px;
@@ -45,7 +47,7 @@ body {
 }
 
 textarea.form-control{
-    min-height: 160px;
+    min-height: 200px;
 }
 
 .content-group {

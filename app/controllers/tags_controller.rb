@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
     before_action :course, only: [:show, :edit, :update, :destory]
-
+    before_action :set_tag
     def index
         @tags = course.tags.distinct
         # @titles = Article.distinct.pluck(:title)
@@ -19,7 +19,7 @@ class TagsController < ApplicationController
     def update
         respond_to do |format|
             if @tag.update(tag_params)
-            format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+            format.html { redirect_to course_tag_path(course, @tag), notice: 'Tag was successfully updated.' }
             format.json { render :show, status: :ok, location: @tag }
             else
             format.html { render :edit }
@@ -35,7 +35,11 @@ class TagsController < ApplicationController
     private
     # Only allow a list of trusted parameters through.
     def tag_params
-        params.require(:tag).permit(:name)
+        params.require(:tag).permit(:name, :description)
+    end
+
+    def set_tag
+        @tag = course.tags.find(params[:id])
     end
 
     def articles

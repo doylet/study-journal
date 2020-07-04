@@ -1,6 +1,13 @@
-<%= link_to 'Tags', course_tags_path %> | <%= link_to 'Home', root_path %> 
+<ul class="nav">
+  <li class="nav-item">
+    <%= link_to 'Home', root_path, class:"nav-link" %> 
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Tags', course_tags_path, class:"nav-link" %>
+  </li>
+</ul>
 <hr>
-<p>Articles Tagged with: <strong><%= @tag.name %></strong> (<%= link_to 'edit', edit_course_tag_path(@course, @tag) %>)</p>
+<p>Articles Tagged with: <strong><%= @tag.name.camelize %></strong> (<%= link_to 'edit', edit_course_tag_path(@course, @tag) %>)</p>
 <hr>
 <div>
 <% @tag.articles.each do |article| %>
@@ -11,7 +18,7 @@
       <strong>Answer</strong>
       <p><%= markdown(article.answer) %></p>
     </div>
-    <%= link_to 'Edit', {controller: "articles", action: "edit"}, class:"btn btn-primary btn-sm" %>
+    <%= link_to 'Edit', edit_course_article_path(@course, article), class:"btn btn-primary btn-sm" %>
     <hr>
   <% end %>
 </div>

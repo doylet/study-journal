@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
   
   # GET course/:course_id/articles/1/edit
   def edit
-    @article = course.article.find(params[:id])
+    @article = course.articles.find(params[:id])
     # @article.course_id = params[:id]
   end
 

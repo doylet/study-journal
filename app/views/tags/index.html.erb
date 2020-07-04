@@ -1,15 +1,20 @@
-
-   <%= link_to 'New article', new_course_article_path %>
-   
-   <div class="row">
-        <div class="col-md">
-            <ul>
-                <% @tags.order("name asc").each do |tag| %>
-                    <% if tag.articles.size > 0 %>
-                        <li><%= link_to tag.name, course_tag_path(@course, tag) %> <%= tag.articles.size %></li>
+    <ul class="nav">
+    <li class="nav-item">
+        <%= link_to 'New article', new_course_article_path, class:"nav-link" %>
+   </li>
+   </ul>
+   <div class="container">
+    <div class="row">
+            <div class="col-md">
+                <div>
+                    <% @tags.order("name asc").each do |tag| %>
+                        <% if tag.articles.size > 0 %>
+                            <%= link_to tag.name, course_tag_path(@course, tag) %> <%= tag.articles.size %><br/>
+                            <%= tag.description %>
+                        <% end %>
                     <% end %>
-                <% end %>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

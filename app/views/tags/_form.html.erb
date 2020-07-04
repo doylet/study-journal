@@ -1,5 +1,5 @@
-
-<%= form_with(model: tag, local: true) do |form| %>
+<div class="col">
+<%= form_with(model: [@course, tag], local: true) do |form| %>
   <% if tag.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
@@ -13,9 +13,13 @@
   <% end %>
 
   <div class="form-group">
-      <%= form.text_field :tag_list, class:"form-control" %>
+      <%= form.text_field :name, class:"form-control" %>
   </div>
+  <div class="form-group">
+      <%= form.label :description, class: "col-xs-12 control-label" %>
+      <%= form.text_area :description, class:"form-control" %>
 
   <%= form.submit "Submit", class: "btn btn-default btn-primary btn-sm" %>
   
 <% end %>
+</div>

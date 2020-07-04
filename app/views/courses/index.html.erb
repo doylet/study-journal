@@ -1,7 +1,14 @@
+
+
 <ul class="nav">
   <li class="nav-item">
     <%= link_to 'New Course', new_course_path, class:"nav-link" %>
   </li>
+  <% @courses.each do |course| %>
+    <li class="nav-item">
+      <%= link_to course.code.upcase, course_tags_path(course), class:"nav-link" %>
+    </li>
+  <% end %>
 </ul>
 
 <p id="notice"><%= notice %></p>

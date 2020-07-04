@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @glossary.Title %>
+</p>
+
+<p>
+  <strong>Definition:</strong>
+  <%= @glossary.Definition %>
+</p>
+
+<p>
+  <strong>Courses:</strong>
+  <%= @glossary.courses %>
+</p>
+
+<%= link_to 'Edit', edit_glossary_path(@glossary) %> |
+<%= link_to 'Back', glossaries_path %>
