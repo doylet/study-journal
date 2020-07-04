@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
     before_action :course, only: [:show, :edit, :update, :destory]
-    before_action :set_tag
+    before_action :set_tag, only: [:show, :edit, :update, :destroy]
+
     def index
         @tags = course.tags.distinct
         # @titles = Article.distinct.pluck(:title)

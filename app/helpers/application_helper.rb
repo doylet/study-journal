@@ -19,4 +19,29 @@ module ApplicationHelper
         markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
         markdown_to_html.render(text).html_safe
       end
-end
+    end
+
+    class LatexMarkdown < Redcarpet::Render::HTML
+      def preprocess(text)
+        wrap_latex(text)
+      end
+    
+      def wrap_latex(text)
+        text.gsub! /(\$\$)(.+)(\$\$)/ do
+          "#{$1}\[#{$2}\]#{$3}"
+        end
+        text
+      end
+    end
+
+    # app/helpers/application_helper.rb
+    def latex_markdown_to_html(text)
+      renderer = LatexMarkdown.new(:filter_html => true, :hard_wrap => true)
+      # These options might be helpful but are not required
+      options = {
+        safe_links_only: true,
+        no_intra_emphasis: true,
+        autolink: true
+      }
+      Redcarpet::Markdown.new(renderer, options).render(text).html_safe
+    end

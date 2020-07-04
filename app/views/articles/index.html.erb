@@ -1,10 +1,16 @@
 <% if notice %>
-<div id="notice" class="alert alert-primary" role="alert"><%= notice %></div>
+  <div id="notice" class="alert alert-primary" role="alert"><%= notice %></div>
 <% end %>
 <div>
 </div>
-<br>
-<%= link_to 'Home', course_tags_path %> | <%= link_to 'New Article', new_course_article_path %>
+<ul class="nav">
+  <li class="nav-item">
+    <%= link_to 'Tags', course_tags_path, class:"nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'New Article', new_course_article_path, class:"nav-link" %>
+  </li>
+</ul>
   <table class="table table-bordered">
     <thead>
       <tr>

@@ -1,5 +1,5 @@
 
-<div class="col-xs-12 col-8">
+<div class="col-md-12 col-lg-8">
 <%= form_with(model: [@course, article], local: true) do |form| %>
   <% if article.errors.any? %>
     <div id="error_explanation">
@@ -34,6 +34,7 @@
   </div>
 
   <%= form.submit "Submit", class: "btn btn-default btn-primary" %>
+  <%= link_to "Cancel", course_tags_path, class: "btn btn-default btn-light" %>
   
 <% end %>
 </div>

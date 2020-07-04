@@ -7,13 +7,13 @@
   <div class="row justify-content-start">
     <div class="col align-self-start">
       <%= link_to 'Home', root_path %> | 
-      <%= link_to 'Back', course_articles_path(@course) %> |
+      <%= link_to 'Back', course_tag_path(@course, tag_id: @tag) %> |
       <%= link_to 'Edit', edit_course_article_path(@course, @article) %>
     </div>
   </div>
 
   <div class="jumbotron">
-    <p><%= @article.title %></p>
+    <h3><%= @article.title %></h3>
     <h1><%= @article.subject %></h1>
     <div class="content-group">
     <p>
@@ -24,14 +24,14 @@
       <div class="content-group">
       <h2>Answer</h2>
       <p>
-        <%= markdown(@article.answer) %>
+        <%= latex_markdown_to_html(@article.answer) %>
       </p>
     </div>
     <div class="content-group">
       <p>
       Tags:
       <% @article.tags.each do |tag| %>
-        <%= link_to tag.name, course_tag_path(@course, tag) %>
+        <span class="badge-pill badge-light"><%= link_to tag.name, course_tag_path(@course, tag) %></span>
       <% end %>
       </p>
     </div>
