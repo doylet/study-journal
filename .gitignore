@@ -30,7 +30,7 @@
 /public/assets
 .byebug_history
 
-/public/system
+/public/system/*
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
