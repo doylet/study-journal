@@ -3,37 +3,70 @@
 <% end %>
 
 <div class="container">
-
   <div class="row justify-content-start">
     <div class="col align-self-start">
-      <%= link_to 'Home', root_path %> | 
-      <%= link_to 'Back', course_tag_path(@course, tag_id: @tag) %> |
-      <%= link_to 'Edit', edit_course_article_path(@course, @article) %>
+      <ul class="nav">
+        <li class="nav-item">
+          <%= link_to 'Home', root_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Back', course_articles_path(@course), class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'New article', new_course_article_path(@course), class:"nav-link" %>
+        </li>
+        <hr>
+        <li class="nav-item">
+          <%= link_to 'Edit', edit_course_article_path(@course, @article), class:"btn btn-light" %>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <div class="jumbotron">
-    <h3><%= @article.title %></h3>
-    <h1><%= @article.subject %></h1>
-    <div class="content-group">
-    <p>
-      <h2>Question</h2>
-      <%= markdown(@article.question) %>
-    </p>
-    </div>
-      <div class="content-group">
-      <h2>Answer</h2>
-      <p>
-        <%= latex_markdown_to_html(@article.answer) %>
-      </p>
-    </div>
-    <div class="content-group">
-      <p>
-      Tags:
-      <% @article.tags.each do |tag| %>
-        <span class="badge-pill badge-light"><%= link_to tag.name, course_tag_path(@course, tag) %></span>
+  <div class="card mb-3">
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+
+        <h3 class="card-title"><%= @article.subject %></h3>
+        <h6 class="card-subtitle mb-2 text-muted"><%= @article.title %></h6>
+
+      </li>
+
+      <li class="list-group-item">
+        Tags:
+        <% @article.tags.each do |tag| %>
+          <span class="badge-pill badge-light"><%= link_to tag.name, course_tag_path(@course, tag) %></span>
+        <% end %>
+      </li>
+
+      <li class="list-group-item">
+        <h5>Question</h5>
+        <p class="card-text">
+          <%= latex_markdown_to_html(@article.question) %>
+        </p>
+      </li>
+
+      <% if @article.image.exists? %>
+        <li class="list-group-item">
+          <%= image_tag @article.image.url(:medium) %>
+        </li>  
       <% end %>
-      </p>
-    </div>
+
+      <li class="list-group-item">
+        <h5>Notes</h5>
+        <%= render partial: 'comments/form' %>
+      </li>
+
+      <li class="list-group-item">
+        <% unless @article.answer.blank? %>
+          <h5>Answers</h5>
+          <p class="card-text">
+            <%= latex_markdown_to_html(@article.answer) %>
+          </p>
+        <% end %>
+        <%= render partial: 'articles/comment', collection: @article.comments %>
+      </li>
+    </ul>
   </div>
 </div>

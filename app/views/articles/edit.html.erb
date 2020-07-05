@@ -1,9 +1,15 @@
 
-<div class="m-16">
+<ul class="nav">
+    <li class="nav-item">
+        <%= link_to 'Show', course_article_path(@course, @article), class:"nav-link" %>
+    </li>
+    <li class="nav-item">
+        <%= link_to 'Back', course_articles_path, class:"nav-link" %>
+    </li>
+</ul>
+<div class="m-3">
 <strong>Editing Article</strong>
 
 <%= render 'form', article: @article %>
 
-<%= link_to 'Show', course_article_path(@course, @article) %> |
-<%= link_to 'Back', course_tags_path %>
 <div>

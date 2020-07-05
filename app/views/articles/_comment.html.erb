@@ -1,4 +1,9 @@
-<div>
-<p><%= distance_of_time_in_words(comment.article.created_at, comment.created_at) %> later</p>
-<p class="comment"><%= comment.body %></p>
-</div>
+<li class="list-group-item">
+<code>Comment.find(<%= comment.id %>)</code>
+<%= latex_markdown_to_html(comment.body) %>
+<% if comment.image.exists? %>
+    <div class="card-img-top">
+    <%= image_tag comment.image.url(:medium) %>
+    </div>  
+<% end %>
+</li>

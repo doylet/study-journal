@@ -39,6 +39,9 @@ gem 'coderay'
 # Image support
 gem 'image_processing'
 
+# Image upload service
+gem "paperclip"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

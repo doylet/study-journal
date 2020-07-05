@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  # before_action :course, only: [:show, :edit, :update, :destroy]
+  before_action :course, only: [:show, :edit, :update, :destroy]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   # GET /articles
@@ -13,7 +13,8 @@ class ArticlesController < ApplicationController
   def show
     @course
     # @articles = course.articles.find(params[:id])
-    # @article = @articles.find(params[:id])
+    @comment = Comment.new()
+    @comment.article_id = @article.id
   end
 
   # GET /articles/new
@@ -25,6 +26,8 @@ class ArticlesController < ApplicationController
   def edit
     @article = course.articles.find(params[:id])
     # @article.course_id = params[:id]
+    @comment = Comment.new()
+    @comment.article_id = @article.id
   end
 
   # POST /courses/1/articles
@@ -79,6 +82,6 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :subject, :question, :answer, :tag_list, :course_id)
+      params.require(:article).permit(:title, :subject, :question, :answer, :tag_list, :course_id, :image)
     end
 end

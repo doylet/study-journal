@@ -1,15 +1,21 @@
-<div class="form-group">
-<%= form_for [ @article, @comment ] do |f| %>
+
+<div class="form-group mt-16">
+  <%= form_for [@article, @comment] do |form| %>
+    <div class="form-group">
     <p>
-      <%= f.label :author_name, "Your name" %><br/>
-      <%= f.text_field :author_name, class:"form-control" %>
+      <%= form.label :body, "Create notes" %><br/>
+      <%= form.text_area :body, class:"form-control" %>
     </p>
+    </div>
+    <div class="form-group">
+      <% if @comment.image.exists? %>
+        <%= image_tag @comment.image.url(:small) %><br/>
+      <% end %>
+      <%= form.label :image, "Attach an Image" %><br />
+      <%= form.file_field :image %>
+    </div>
     <p>
-      <%= f.label :body, "Your comment" %><br/>
-      <%= f.text_area :body, class:"form-control" %>
-    </p>
-    <p>
-      <%= f.submit 'Submit', class: "btn btn-default btn-primary" %>
+      <%= form.submit 'Submit', class: "btn btn-default btn-primary" %>
     </p>
   <% end %>
 </div>

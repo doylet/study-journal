@@ -10,7 +10,7 @@ class TagsController < ApplicationController
     
     def show
         @course = course
-        @tag = @course.tags.find(params[:id])
+        @tag
     end
 
     def edit
@@ -20,7 +20,7 @@ class TagsController < ApplicationController
     def update
         respond_to do |format|
             if @tag.update(tag_params)
-            format.html { redirect_to course_tag_path(course, @tag), notice: 'Tag was successfully updated.' }
+            format.html { redirect_to course_tags_path(course), notice: 'Tag was successfully updated.' }
             format.json { render :show, status: :ok, location: @tag }
             else
             format.html { render :edit }
@@ -36,7 +36,7 @@ class TagsController < ApplicationController
     private
     # Only allow a list of trusted parameters through.
     def tag_params
-        params.require(:tag).permit(:name, :description)
+        params.require(:tag).permit(:name, :description, :image)
     end
 
     def set_tag

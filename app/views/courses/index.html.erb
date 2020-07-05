@@ -6,7 +6,7 @@
   </li>
   <% @courses.each do |course| %>
     <li class="nav-item">
-      <%= link_to course.code.upcase, course_tags_path(course), class:"nav-link" %>
+      <%= link_to course.code.upcase, course_articles_path(course), class:"nav-link" %>
     </li>
   <% end %>
 </ul>
@@ -19,7 +19,7 @@
       <th>Code</th>
       <th>Title</th>
       <th>Semester</th>
-      <th colspan="4"></th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -29,7 +29,6 @@
         <td><%= course.title.upcase %></td>
         <td><%= course.semester %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

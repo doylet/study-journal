@@ -16,9 +16,9 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :articles do
-  #   resources :comments
-  # end  
+  resources :articles do
+    resources :comments
+  end  
   
   # resources :tags do
   #   resources :articles

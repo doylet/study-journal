@@ -3,22 +3,48 @@
     <%= link_to 'Home', root_path, class:"nav-link" %> 
   </li>
   <li class="nav-item">
-    <%= link_to 'Back', course_tags_path, class:"nav-link" %>
+    <%= link_to 'Back', course_tags_path(@course), class:"nav-link" %>
   </li>
 </ul>
-<hr>
-<p>Articles Tagged with: <strong><%= @tag.name.camelize %></strong> (<%= link_to 'edit', edit_course_tag_path(@course, @tag) %>)</p>
-<hr>
-<div>
+
+<div class="container">
+<ul class="list-group">
+  <li class="list-group-item">
+    Articles Tagged with: <strong><%= @tag.name.camelize %></strong> (<%= link_to 'edit', edit_course_tag_path(@course, @tag) %>)
+  </li>
+
+  <% if @tag.image.exists? %>
+  <li class="list-group-item">
+    <%= image_tag @tag.image.url(:medium) %>
+  </li>  
+  <% end %>
+
+</ul>
+
 <% @tag.articles.each do |article| %>
-    <div>
-      <p><%= link_to article.title, course_tag_article_path(@course, @tag, article) %></p>
+  <ul class="list-group mb-3">
+    <li class="list-group-item">
+      <%= article.title %> / <%= link_to article.subject, course_tag_article_path(@course, @tag, article) %> <%= link_to 'Edit', edit_course_article_path(@course, article), class:"btn btn-light mr-auto" %>
+    </li>
+
+    <li class="list-group-item">
+    <%= image_tag article.image.url(:medium) %>
+    </li>
+
+    <% unless article.question.blank? %>
+    <li class="list-group-item">
       <strong>Question</strong>
       <p><%= markdown(article.question) %></p>
-      <strong>Answer</strong>
-      <p><%= markdown(article.answer) %></p>
-    </div>
-    <%= link_to 'Edit', edit_course_article_path(@course, article), class:"btn btn-primary btn-sm" %>
-    <hr>
+    </li>
+    <% end %>
+
+    <li class="list-group-item">
+      <% unless article.answer.blank? %>
+        <strong>Answer</strong>
+        <p><%= markdown(article.answer) %></p>
+      <% end %>
+      <%= render partial: 'articles/comment', collection: article.comments %>
+      </li>
+  </ul>
   <% end %>
 </div>

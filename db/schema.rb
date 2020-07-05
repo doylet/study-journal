@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_004846) do
+ActiveRecord::Schema.define(version: 2020_07_04_231632) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -51,6 +51,10 @@ ActiveRecord::Schema.define(version: 2020_07_04_004846) do
     t.text "answer"
     t.string "subject"
     t.integer "course_id"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["course_id"], name: "index_articles_on_course_id"
   end
 
@@ -70,6 +74,10 @@ ActiveRecord::Schema.define(version: 2020_07_04_004846) do
     t.integer "article_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
@@ -109,6 +117,10 @@ ActiveRecord::Schema.define(version: 2020_07_04_004846) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

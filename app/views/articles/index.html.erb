@@ -1,42 +1,48 @@
 <% if notice %>
   <div id="notice" class="alert alert-primary" role="alert"><%= notice %></div>
 <% end %>
-<div>
-</div>
+
 <ul class="nav">
-  <li class="nav-item">
-    <%= link_to 'Tags', course_tags_path, class:"nav-link" %>
-  </li>
   <li class="nav-item">
     <%= link_to 'New Article', new_course_article_path, class:"nav-link" %>
   </li>
+  <li class="nav-item">
+    <%= link_to 'Tags', course_tags_path, class:"nav-link" %>
+  </li>
 </ul>
+
   <table class="table table-bordered">
+    <colgroup>
+      <col span="1" style="width: 10%;">
+      <col span="1" style="width: 30%;">
+      <col span="1" style="width: 30%;">
+      <col span="1" style="width: 40%;">
+      <col span="1" style="width: 30%;">
+      <col span="1" style="width: 10%;">
+    </colgroup>
     <thead>
       <tr>
-        <th>Tags</th>
-        <th>Tutorial</th>
+        <th>Subject</th>
+        <th>Image</th>
         <th>Question</th>
-        <th>Answer</th>
-        <th colspan="4"></th>
+        <th>Tags</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <% if @course.articles.size > 0 %>
-        <% @course.articles.each do |article| %>
+        <% @course.articles.order("created_at desc").each do |article| %>
           <tr>
-          <td>  
-            <% if article.tags.size > 0 %>
-              <% article.tags.each do |tag| %>
-                <span style="background: #EEE;">
-                <%= link_to tag.name, course_tag_path(@course, tag) %>
-                </span><br/>
-              <% end %>
-            <% end %>
-          </td>
-            <td><%= link_to article.title, course_article_path(@course, article) %></td>
+            <td><%= link_to article.subject, course_article_path(@course, article) %></td>
+            <td><% if article.image.exists? %><%= image_tag article.image.url(:small) %><% end %></td>
             <td><%= markdown(article.question) %></td>
-            <td><%= markdown(article.answer) %></td>
+            <td>  
+              <% if article.tags.size > 0 %>
+                <% article.tags.each do |tag| %>
+                  <%= link_to tag.name, course_tag_path(@course, tag), class:style="badge badge-light" %>
+                <% end %>
+              <% end %>
+            </td>
             <td>
               <%= link_to 'Show', course_article_path(@course, article) %> |
               <%= link_to 'Edit', edit_course_article_path(@course, article) %> |

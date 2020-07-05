@@ -6,6 +6,9 @@ class Article < ApplicationRecord
     has_many :tags, through: :taggings, dependent: :destroy
     belongs_to :course
 
+    has_attached_file :image, styles: {large: "1440>", medium: "960>", small: "640>", thumb: "300>"}
+    validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+    
     def tag_list
         tags.join(", ")
     end
